@@ -25,7 +25,7 @@ class Bounty(models.Model):
     target_completed = models.BooleanField(default=False, editable=False)
 
     def __str__(self):
-        return self.title
+        return self.target_name
     
     class Meta:
         default_related_name = 'bounties'
