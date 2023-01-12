@@ -1,0 +1,178 @@
+@font-face {
+    font-family: 'PixelFont';
+    src: url('../fonts/yoster.ttf')
+}
+
+body {
+    background-color: #565656;
+    margin: 0px;
+
+    font-family: 'PixelFont';
+}
+
+#container {
+    width: 800px;
+    margin: auto;
+}
+
+#bounty-container {
+    background-image: url("../images/wooden_board.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    height: 322px;
+    width: 800px;
+}
+
+
+
+#bounty-wanted-sign {
+    background-image: url("../images/wanted.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    height: 32px;
+    width: 200px;
+    margin-left: 36px;
+    margin-top: 38px;
+}
+
+#bounty-settings-button {
+    background-image: url("../images/settings_button.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    height: 36px;
+    width: 36px;
+    margin-right: 42px;
+    margin-top: 28px;
+}
+
+
+
+#bounty-name-frame {
+    background-image: url("../images/paper_strap_long.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    height: 40px;
+    width: 328px;
+    margin-right: 158px;
+    margin-top: 34px;
+}
+
+#bounty-name-text {
+    height: 22px;
+    width: 300px;
+    margin-left: 14px;
+    margin-top: 6px;
+}
+
+
+
+#bounty-picture-frame {
+    background-image: url("../images/paper_sheet.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    height: 160px;
+    width: 120px;
+    margin-left: 40px;
+    margin-top: 18px;
+}
+
+#bounty-picture-image {
+    height: 100px;
+    width: 100px;
+    margin-left: 10px;
+    margin-top: 20px;
+}
+
+#bounty-picture-edit {
+    background-image: url("../images/edit_button.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    height: 24px;
+    width: 24px;
+    margin-left: 88px;
+    margin-top: 6px;
+}
+
+
+
+#bounty-description-frame {
+    background-image: url("../images/paper_sheet_large.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    height: 160px;
+    width: 444px;
+    margin-left: 80px;
+    margin-top: 18px;
+
+    display: flex;
+    flex-direction: row;
+}
+
+#bounty-description-text {
+    height: 140px;
+    width: 400px;
+    margin-left: 12px;
+    margin-top: 10px;
+
+    font-family: 'PixelFont';
+    font-size: 14px;
+    overflow-y: hidden;
+    word-break: break-word;
+}
+
+#bounty-description-edit {
+    background-image: url("../images/edit_button.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    height: 24px;
+    width: 24px;
+    margin-top: 126px;
+}
+
+
+
+#bounty-difficulty-frame {
+    background-image: url("../images/paper_strap_short.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    height: 32px;
+    width: 200px;
+    margin-left: 36px;
+    margin-top: 26px;
+}
+
+#bounty-difficulty-text {
+    height: 22px;
+    width: 300px;
+    margin-left: 14px;
+    margin-top: 6px;
+}
+
+
+
+#bounty-reward-frame {
+    background-image: url("../images/paper_strap_long.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    height: 40px;
+    width: 328px;
+    margin-right: 36px;
+    margin-top: 22px;
+}
+
+#bounty-reward-text {
+    height: 22px;
+    width: 300px;
+    margin-left: 14px;
+    margin-top: 6px;
+}

@@ -1,1 +1,61 @@
-<h1>Bounty list</h1>
+{% load static %}
+
+<!DOCTYPE html>
+
+<html>
+    <link rel="stylesheet" href="{% static 'styles/bounty.css' %}">
+</html>
+
+<body>
+    <div id="container">
+        {% for bounty in bounties %}
+        <div id="bounty-container">
+            <div style="display: flex; justify-content: space-between;">
+                <div id="bounty-wanted-sign"></div>
+                <div id="bounty-name-frame">
+                    <div id="bounty-name-text">
+                        {{bounty.target_name}}
+                    </div>
+                </div>
+                <div id="bounty-settings-button"></div>
+            </div>
+            <div style="display: flex;">
+                <div id="bounty-picture-frame">
+                    <div id="bounty-picture-image"></div>
+                    <div id="bounty-picture-edit"></div>
+                </div>
+                <div id="bounty-description-frame">
+                    <div id="bounty-description-text">
+                        {{bounty.target_description}}
+                    </div>
+                    <div id="bounty-description-edit"></div>
+                </div>
+            </div>
+            <div style="display: flex;">
+                <div id="bounty-difficulty-frame">
+                    <div id="bounty-difficulty-text">
+                        {{bounty.target_difficulty}}
+                    </div>
+                </div>
+                <div id="bounty-reward-frame">
+                    <div id="bounty-reward-text">
+                        {{bounty.target_reward}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="display: flex; flex-direction: row;">
+            <div class="category"></div>
+            <div class="category"></div>
+        </div>
+        <div id="middle-bar">
+            <div id="middle-bar-slider"/>
+        </div>
+        <div id="content-section"></div>
+        {% empty %}
+    </div>
+
+    <h3>No bounties</h3>
+
+    {% endfor %}
+</body>
