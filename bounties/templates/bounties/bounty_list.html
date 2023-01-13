@@ -3,11 +3,47 @@
 <!DOCTYPE html>
 
 <html>
-    <link rel="stylesheet" href="{% static 'styles/bounty.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/view_bounty_list.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/bounty_container.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/topbar.css' %}">
 </html>
 
 <body>
-    <div id="container">
+    <div id="topbar">
+        <div id="topbar-logo">Bounty-Hunters</div>
+        <form method="GET">
+            <div id="topbar-middle-grid-container">
+                <div class="topbar-middle-grid-title">-- Name --</div>
+                <div class="topbar-middle-grid-title">-- Reward --</div>
+                <div class="topbar-middle-grid-title">-- Difficulty --</div>
+                <input type="submit" value="Search"/>
+                <!--<button id="topbar-middle-grid-search-button" type="submit">Search</button>-->
+                <input type="text" name="search-name" value="{{ search_input_name }}" style="width: 192px;"/>
+                <div style="display:flex">
+                    <input type="text" name="search-reward-lowest" value="{{ search_input_reward_lowest }}"/> &nbsp;-&nbsp;
+                    <input type="text" name="search-reward-highest" value="{{ search_input_reward_highest }}"/>
+                </div>
+                <div style="display:flex">
+                    1 <input type="checkbox" name="search-difficulties[]" value="{{ search_input_difficulty_1 }}"/>
+                    &nbsp;2 <input type="checkbox" name="search-difficulties[]" value="{{ search_input_difficulty_2 }}"/>
+                    &nbsp;3 <input type="checkbox" name="search-difficulties[]" value="{{ search_input_difficulty_3 }}"/>
+                    &nbsp;4 <input type="checkbox" name="search-difficulties[]" value="{{ search_input_difficulty_4 }}"/>
+                    &nbsp;5 <input type="checkbox" name="search-difficulties[]" value="{{ search_input_difficulty_5 }}"/>
+                </div>
+            </div>
+        </form>
+        <div id="topbar-user">
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'bounties' %}">{{request.user}}</a>
+            <a href="{% url 'logout' %}?next=/">Logout</a>
+            {% else %}
+            <a href="{% url 'login' %}">Log in</a>
+            <a href="{% url 'register' %}">Create new account</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div id="bounties_container">
         {% for bounty in bounties %}
         <div id="bounty-container">
             <div style="display: flex; justify-content: space-between;">
@@ -58,4 +94,6 @@
     <h3>No bounties</h3>
 
     {% endfor %}
+
+    <div style="height: 100px"></div>
 </body>

@@ -1,0 +1,9 @@
+<h3>Bounty delete</h3>
+
+<a href="{% url 'bounties' %}">Go back</a>
+
+<form method="POST">
+    {% csrf_token %}
+    <p>Are you sure you want to delete this bounty?</p>
+    <input type="submit" value="Delete">
+</form>

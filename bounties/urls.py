@@ -11,6 +11,6 @@ urlpatterns = [
 
     path('', BountyListView.as_view(), name='bounties'),
     path('bounty-create/', BountyCreateView.as_view(), name='bounty-create'),
-    path('bounty-update/<int:pk>/', BountyUpdateView.as_view(), name='bounty-create'),
-    path('bounty-delete/<int:pk>/', BountyDeleteView.as_view(), name='bounty-create'),
+    path('bounty-update/<int:pk>/', BountyUpdateView.as_view(), name='bounty-update'),
+    path('bounty-delete/<int:pk>/', BountyDeleteView.as_view(), name='bounty-delete'),
 ]
