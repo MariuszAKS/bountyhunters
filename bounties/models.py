@@ -14,6 +14,7 @@ class Bounty(models.Model):
     ]
 
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
+    hunter = models.IntegerField(default=0)
     
     target_name = models.CharField(max_length=100, default='Bezimienny')
     target_reward = models.IntegerField(default=100)

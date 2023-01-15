@@ -1,8 +1,9 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, models
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect, render
+from django.views.generic import View
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
@@ -35,10 +36,32 @@ class CustomLoginView(LoginView):
     def get_success_url(self):
         return reverse_lazy('bounties')
 
+class UserProfileView(ListView):
+    model = Bounty
+    context_object_name = 'bounties'
+    template_name = 'bounties/user_profile.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['bounties_created'] = context['bounties'].filter(creator=self.request.user.id)
+        context['bounties_completed'] = context['bounties'].filter(hunter=self.request.user.id)
+
+        if self.kwargs['category'] == 'created':
+            context['bounties'] = context['bounties_created']
+        
+        if self.kwargs['category'] == 'completed':
+            context['bounties'] = context['bounties_completed']
+        
+        context['bounties_created_amount'] = context['bounties_created'].count()
+        context['bounties_completed_amount'] = context['bounties_completed'].count()
+
+        return context
+
 
 class BountyListView(ListView):
     model = Bounty
     context_object_name = 'bounties'
+    template_name = 'bounties/bounty_list.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

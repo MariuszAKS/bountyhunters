@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 
 <html>
-    <link rel="stylesheet" href="{% static 'styles/view_bounty_list.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/bounty_container.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/view_user_profile.css' %}">
     <link rel="stylesheet" href="{% static 'styles/topbar.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/bounty_container.css' %}">
 </html>
 
 <body>
@@ -13,27 +13,6 @@
         <a href="{% url 'bounties' %}">
             <div id="topbar-logo">Bounty-Hunters</div>
         </a>
-        <form method="GET">
-            <div id="topbar-middle-grid-container">
-                <div class="topbar-middle-grid-title">-- Name --</div>
-                <div class="topbar-middle-grid-title">-- Reward --</div>
-                <div class="topbar-middle-grid-title">-- Difficulty --</div>
-                <input type="submit" value="Search"/>
-                <!--<button id="topbar-middle-grid-search-button" type="submit">Search</button>-->
-                <input type="text" name="search-name" value="{{ search_input_name }}" style="width: 192px;"/>
-                <div style="display:flex">
-                    <input type="text" name="search-reward-lowest" value="{{ search_input_reward_lowest }}"/> &nbsp;-&nbsp;
-                    <input type="text" name="search-reward-highest" value="{{ search_input_reward_highest }}"/>
-                </div>
-                <div style="display:flex">
-                    1 <input type="checkbox" name="search-difficulties[]" value="{{ search_input_difficulty_1 }}"/>
-                    &nbsp;2 <input type="checkbox" name="search-difficulties[]" value="{{ search_input_difficulty_2 }}"/>
-                    &nbsp;3 <input type="checkbox" name="search-difficulties[]" value="{{ search_input_difficulty_3 }}"/>
-                    &nbsp;4 <input type="checkbox" name="search-difficulties[]" value="{{ search_input_difficulty_4 }}"/>
-                    &nbsp;5 <input type="checkbox" name="search-difficulties[]" value="{{ search_input_difficulty_5 }}"/>
-                </div>
-            </div>
-        </form>
         <div id="topbar-user">
             {% if request.user.is_authenticated %}
             <a href="{% url 'user-profile' request.user.id 'created' %}">{{request.user}}</a>
@@ -43,6 +22,41 @@
             <a href="{% url 'register' %}">Create new account</a>
             {% endif %}
         </div>
+    </div>
+
+    <div id="top_section">
+        <div id="bounty-container">
+            <div style="height: 74px;"></div>
+            <div style="display: flex;">
+                <div id="bounty-picture-frame">
+                    <div id="bounty-picture-image"></div>
+                    <div id="bounty-picture-edit"></div>
+                </div>
+                <div id="bounty-description-frame">
+                    <div id="bounty-description-text">
+                        <div>&nbsp;</div>
+                        <div>Username: {{ user.username }}</div>
+                        <div>&nbsp;&nbsp;Name: {{ user.first_name }} {{ user.last_name }}</div>
+                        <div>&nbsp;&nbsp;Email: {{ user.email }}</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>Created bounties: {{ bounties_created_amount }}</div>
+                        <div>Completed bounties: {{ bounties_completed_amount }}</div>
+                        <div></div>
+                    </div>
+                    <div id="bounty-description-edit"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="width: min-content; margin: auto; display: flex;">
+        <a href="{% url 'user-profile' request.user.id 'created' %}">
+            <div class="category">Created</div>
+        </a>
+        <a href="{% url 'user-profile' request.user.id 'completed' %}">
+            <div class="category">Completed</div>
+        </a>
     </div>
 
     <div id="bounties_container">

@@ -1,0 +1,40 @@
+@font-face {
+    font-family: 'PixelFont';
+    src: url('../fonts/yoster.ttf')
+}
+
+body {
+    background-color: #565656;
+    margin: 0px;
+    overflow-y: scroll;
+    font-family: 'PixelFont';
+}
+
+#top_section {
+    background-image: url('../images/user_profile_top.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    width: 800px;
+    margin: auto;
+    margin-top: 64px;
+}
+
+.category {
+    background-image: url('../images/category_image.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    height: 56px;
+    width: 400px;
+
+    color: black;
+    font-size: 36px;
+    padding-top: 40px;
+    text-shadow: none;
+}
+
+#bounties_container {
+    width: 800px;
+    margin: auto;
+}

@@ -4,13 +4,13 @@
 }
 
 body, button {
-    overflow-y: scroll;
     font-family: 'PixelFont';
 }
 
 body{
     background-color: #565656;
     margin: 0px;
+    overflow-y: scroll;
 }
 
 
