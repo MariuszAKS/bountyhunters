@@ -44,10 +44,14 @@ class UserProfileView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['bounties_created'] = context['bounties'].filter(creator=self.request.user.id)
+        context['bounties_observing'] = context['bounties']
         context['bounties_completed'] = context['bounties'].filter(hunter=self.request.user.id)
 
         if self.kwargs['category'] == 'created':
             context['bounties'] = context['bounties_created']
+        
+        if self.kwargs['category'] == 'observing':
+            context['bounties'] = context['bounties_observing']
         
         if self.kwargs['category'] == 'completed':
             context['bounties'] = context['bounties_completed']

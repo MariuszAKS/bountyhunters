@@ -31,6 +31,28 @@
     text-shadow: 2px 2px #000, 4px 4px #000;
 }
 
+
+
+#topbar-middle-categories {
+    width: 800px;
+
+    display: flex;
+}
+
+.topbar-middle-category-button {
+    background-image: url("../images/topbar_category_button.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    height: 48px;
+    width: 250px;
+    padding-top: 14px;
+
+    font-size: 28px;
+}
+
+
+
 #topbar-middle-grid-container {
     width: 800px;
 

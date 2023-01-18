@@ -13,6 +13,19 @@
         <a href="{% url 'bounties' %}">
             <div id="topbar-logo">Bounty-Hunters</div>
         </a>
+        <div id="topbar-middle-categories">
+            <a href="{% url 'user-profile' request.user.id 'created' %}">
+                <div class="topbar-middle-category-button">Created</div>
+            </a>
+            <div style="width: 25px"></div>
+            <a href="{% url 'user-profile' request.user.id 'observing' %}">
+                <div class="topbar-middle-category-button">Observing</div>
+            </a>
+            <div style="width: 25px"></div>
+            <a href="{% url 'user-profile' request.user.id 'completed' %}">
+                <div class="topbar-middle-category-button">Completed</div>
+            </a>
+        </div>
         <div id="topbar-user">
             {% if request.user.is_authenticated %}
             <a href="{% url 'user-profile' request.user.id 'created' %}">{{request.user}}</a>
@@ -24,7 +37,7 @@
         </div>
     </div>
 
-    <div id="top_section">
+    <div style="width: 800px; margin: auto; margin-top: 64px;">
         <div id="bounty-container">
             <div style="height: 74px;"></div>
             <div style="display: flex;">
@@ -48,15 +61,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div style="width: min-content; margin: auto; display: flex;">
-        <a href="{% url 'user-profile' request.user.id 'created' %}">
-            <div class="category">Created</div>
-        </a>
-        <a href="{% url 'user-profile' request.user.id 'completed' %}">
-            <div class="category">Completed</div>
-        </a>
     </div>
 
     <div id="bounties_container">

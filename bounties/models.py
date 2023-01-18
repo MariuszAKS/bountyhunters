@@ -31,3 +31,14 @@ class Bounty(models.Model):
     class Meta:
         default_related_name = 'bounties'
         ordering = ['target_posted_date']
+
+class Observe(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    bounty = models.ForeignKey(Bounty, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username + " observing " + self.bounty.__str__()
+    
+    class Meta:
+        default_related_name = 'observes'
+        ordering = ['user']

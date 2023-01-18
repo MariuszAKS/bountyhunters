@@ -10,16 +10,6 @@ body {
     font-family: 'PixelFont';
 }
 
-#top_section {
-    background-image: url('../images/user_profile_top.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-
-    width: 800px;
-    margin: auto;
-    margin-top: 64px;
-}
-
 .category {
     background-image: url('../images/category_image.png');
     background-repeat: no-repeat;
