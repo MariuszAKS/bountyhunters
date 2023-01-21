@@ -1,4 +1,4 @@
-#bounty-container {
+.bounty-container {
     background-image: url("../images/wooden_board.png");
     background-repeat: no-repeat;
     background-size: contain;
@@ -9,7 +9,7 @@
 
 
 
-#bounty-wanted-sign {
+.bounty-wanted-sign {
     background-image: url("../images/wanted.png");
     background-repeat: no-repeat;
     background-size: contain;
@@ -20,8 +20,18 @@
     margin-top: 38px;
 }
 
-#bounty-settings-button {
+.bounty-settings-button {
     background-image: url("../images/settings_button.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    height: 36px;
+    width: 36px;
+    margin-right: 42px;
+    margin-top: 28px;
+}
+
+.bounty-observe-button {
     background-repeat: no-repeat;
     background-size: contain;
 
@@ -33,7 +43,7 @@
 
 
 
-#bounty-name-frame {
+.bounty-name-frame {
     background-image: url("../images/paper_strap_long.png");
     background-repeat: no-repeat;
     background-size: contain;
@@ -44,7 +54,7 @@
     margin-top: 34px;
 }
 
-#bounty-name-text {
+.bounty-name-text {
     height: 22px;
     width: 300px;
     margin-left: 14px;
@@ -53,7 +63,7 @@
 
 
 
-#bounty-picture-frame {
+.bounty-picture-frame {
     background-image: url("../images/paper_sheet.png");
     background-repeat: no-repeat;
     background-size: contain;
@@ -64,14 +74,14 @@
     margin-top: 18px;
 }
 
-#bounty-picture-image {
+.bounty-picture-image {
     height: 100px;
     width: 100px;
     margin-left: 10px;
     margin-top: 20px;
 }
 
-#bounty-picture-edit {
+.bounty-picture-edit {
     background-image: url("../images/edit_button.png");
     background-repeat: no-repeat;
     background-size: contain;
@@ -84,7 +94,7 @@
 
 
 
-#bounty-description-frame {
+.bounty-description-frame {
     background-image: url("../images/paper_sheet_large.png");
     background-repeat: no-repeat;
     background-size: contain;
@@ -98,7 +108,7 @@
     flex-direction: row;
 }
 
-#bounty-description-text {
+.bounty-description-text {
     height: 140px;
     width: 400px;
     margin-left: 12px;
@@ -110,7 +120,7 @@
     word-break: break-word;
 }
 
-#bounty-description-edit {
+.bounty-description-edit {
     background-image: url("../images/edit_button.png");
     background-repeat: no-repeat;
     background-size: contain;
@@ -122,7 +132,7 @@
 
 
 
-#bounty-difficulty-frame {
+.bounty-difficulty-frame {
     background-image: url("../images/paper_strap_short.png");
     background-repeat: no-repeat;
     background-size: contain;
@@ -133,7 +143,7 @@
     margin-top: 26px;
 }
 
-#bounty-difficulty-text {
+.bounty-difficulty-text {
     height: 22px;
     width: 300px;
     margin-left: 14px;
@@ -142,7 +152,7 @@
 
 
 
-#bounty-reward-frame {
+.bounty-reward-frame {
     background-image: url("../images/paper_strap_long.png");
     background-repeat: no-repeat;
     background-size: contain;
@@ -153,7 +163,7 @@
     margin-top: 22px;
 }
 
-#bounty-reward-text {
+.bounty-reward-text {
     height: 22px;
     width: 300px;
     margin-left: 14px;

@@ -22,8 +22,8 @@
                 <div class="topbar-middle-category-button">Observing</div>
             </a>
             <div style="width: 25px"></div>
-            <a href="{% url 'user-profile' request.user.id 'completed' %}">
-                <div class="topbar-middle-category-button">Completed</div>
+            <a href="{% url 'bounty-create' %}">
+                <div class="topbar-middle-category-button">+ Create +</div>
             </a>
         </div>
         <div id="topbar-user">
@@ -38,15 +38,15 @@
     </div>
 
     <div style="width: 800px; margin: auto; margin-top: 64px;">
-        <div id="bounty-container">
+        <div class="bounty-container">
             <div style="height: 74px;"></div>
             <div style="display: flex;">
-                <div id="bounty-picture-frame">
-                    <div id="bounty-picture-image"></div>
-                    <div id="bounty-picture-edit"></div>
+                <div class="bounty-picture-frame">
+                    <div class="bounty-picture-image"></div>
+                    <div class="bounty-picture-edit"></div>
                 </div>
-                <div id="bounty-description-frame">
-                    <div id="bounty-description-text">
+                <div class="bounty-description-frame">
+                    <div class="bounty-description-text">
                         <div>&nbsp;</div>
                         <div>Username: {{ user.username }}</div>
                         <div>&nbsp;&nbsp;Name: {{ user.first_name }} {{ user.last_name }}</div>
@@ -57,7 +57,7 @@
                         <div>Completed bounties: {{ bounties_completed_amount }}</div>
                         <div></div>
                     </div>
-                    <div id="bounty-description-edit"></div>
+                    <div class="bounty-description-edit"></div>
                 </div>
             </div>
         </div>
@@ -65,36 +65,36 @@
 
     <div id="bounties_container">
         {% for bounty in bounties %}
-        <div id="bounty-container">
+        <div class="bounty-container">
             <div style="display: flex; justify-content: space-between;">
-                <div id="bounty-wanted-sign"></div>
-                <div id="bounty-name-frame">
-                    <div id="bounty-name-text">
+                <div class="bounty-wanted-sign"></div>
+                <div class="bounty-name-frame">
+                    <div class="bounty-name-text">
                         {{bounty.target_name}}
                     </div>
                 </div>
-                <div id="bounty-settings-button"></div>
+                <div class="bounty-settings-button"></div>
             </div>
             <div style="display: flex;">
-                <div id="bounty-picture-frame">
-                    <div id="bounty-picture-image"></div>
-                    <div id="bounty-picture-edit"></div>
+                <div class="bounty-picture-frame">
+                    <div class="bounty-picture-image"></div>
+                    <div class="bounty-picture-edit"></div>
                 </div>
-                <div id="bounty-description-frame">
-                    <div id="bounty-description-text">
+                <div class="bounty-description-frame">
+                    <div class="bounty-description-text">
                         {{bounty.target_description}}
                     </div>
-                    <div id="bounty-description-edit"></div>
+                    <div class="bounty-description-edit"></div>
                 </div>
             </div>
             <div style="display: flex;">
-                <div id="bounty-difficulty-frame">
-                    <div id="bounty-difficulty-text">
+                <div class="bounty-difficulty-frame">
+                    <div class="bounty-difficulty-text">
                         {{bounty.target_difficulty}}
                     </div>
                 </div>
-                <div id="bounty-reward-frame">
-                    <div id="bounty-reward-text">
+                <div class="bounty-reward-frame">
+                    <div class="bounty-reward-text">
                         {{bounty.target_reward}}
                     </div>
                 </div>

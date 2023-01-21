@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import ModelForm
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
@@ -15,6 +16,7 @@ class Bounty(models.Model):
 
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     hunter = models.IntegerField(default=0)
+    observed = models.BooleanField(default=False)
     
     target_name = models.CharField(max_length=100, default='Bezimienny')
     target_reward = models.IntegerField(default=100)
@@ -33,12 +35,12 @@ class Bounty(models.Model):
         ordering = ['target_posted_date']
 
 class Observe(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    bounty = models.ForeignKey(Bounty, on_delete=models.CASCADE)
+    user_id = models.IntegerField()
+    bounty_id = models.IntegerField()
 
     def __str__(self):
-        return self.user.username + " observing " + self.bounty.__str__()
+        return "User " + str(self.user_id) + " observing bounty " + str(self.bounty_id)
     
     class Meta:
         default_related_name = 'observes'
-        ordering = ['user']
+        ordering = ['user_id']
