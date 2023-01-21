@@ -71,31 +71,31 @@ class BountyListView(ListView):
     context_object_name = 'bounty_list'
     template_name = 'bounties/bounty_list.html'
 
-    def get(self, *args, **kwargs):
-        self.object_list = self.get_queryset()
-        context = self.get_context_data()
+    # def get(self, *args, **kwargs):
+    #     self.object_list = self.get_queryset()
+    #     context = self.get_context_data()
 
-        for bounty in context['bounties']:
-            bounty.observed = any((obs.user_id == self.request.user.id and obs.bounty_id == bounty.id) for obs in context['observe_list'])
+    #     for bounty in context['bounties']:
+    #         bounty.observed = any((obs.user_id == self.request.user.id and obs.bounty_id == bounty.id) for obs in context['observe_list'])
 
-        return self.render_to_response(context)
+    #     return self.render_to_response(context)
 
-    def post(self, *args, **kwargs):
-        user_id = self.request.user.id
-        bounty_id = int(self.request.POST['bounty_id'])
+    # def post(self, *args, **kwargs):
+    #     user_id = self.request.user.id
+    #     bounty_id = int(self.request.POST['bounty_id'])
 
-        self.object_list = self.get_queryset()
-        context = self.get_context_data()
+    #     self.object_list = self.get_queryset()
+    #     context = self.get_context_data()
 
-        if not any((obs.user_id == user_id and obs.bounty_id == bounty_id) for obs in context['observe_list']):
-            observe = Observe.objects.create(user_id=user_id, bounty_id=bounty_id)
-            observe.save()
-            print('SAVE')
-        else:
-            Observe.objects.filter(user_id=user_id).filter(bounty_id=bounty_id).delete()
-            print('DELETE')
+    #     if not any((obs.user_id == user_id and obs.bounty_id == bounty_id) for obs in context['observe_list']):
+    #         observe = Observe.objects.create(user_id=user_id, bounty_id=bounty_id)
+    #         observe.save()
+    #         print('SAVE')
+    #     else:
+    #         Observe.objects.filter(user_id=user_id).filter(bounty_id=bounty_id).delete()
+    #         print('DELETE')
         
-        return self.get(*args, **kwargs)
+    #     return self.get(*args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -116,6 +116,9 @@ class BountyListView(ListView):
         if search_input_reward_highest:
             context['bounties'] = context['bounties'].filter(target_reward__lt=search_input_reward_highest)
         
+        for bounty in context['bounties']:
+            bounty.observed = any((obs.user_id == self.request.user.id and obs.bounty_id == bounty.id) for obs in context['observe_list'])
+        
         # search_input_difficulties = self.request.GET.getlist('search-difficulty')
         # print(search_input_difficulties)
         # search_input_difficulty_1 = self.request.GET.get('search-difficulty-1')
@@ -134,6 +137,23 @@ class BountyListView(ListView):
         # context['search_input_difficulty_5'] = search_input_difficulty_5
 
         return context
+
+def update_observe(request, *args, **kwargs):
+    if request.method == 'POST':
+        user_id = request.user.id
+        bounty_id = int(request.POST['bounty_id'])
+
+        observe_list = Observe.objects.all().filter(user_id=request.user.id)
+
+        if not any((obs.user_id == user_id and obs.bounty_id == bounty_id) for obs in observe_list):
+            observe = Observe.objects.create(user_id=user_id, bounty_id=bounty_id)
+            observe.save()
+            print('SAVE')
+        else:
+            Observe.objects.filter(user_id=user_id).filter(bounty_id=bounty_id).delete()
+            print('DELETE')
+        
+        return redirect('/')
 
 class BountyCreateView(CreateView):
     model = Bounty

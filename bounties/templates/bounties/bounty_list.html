@@ -56,7 +56,7 @@
                         {{bounty.target_name}}
                     </div>
                 </div>
-                <form method="POST">
+                <form action="update-observe/" method="POST">
                     {% csrf_token %}
                     <input type="hidden" name="bounty_id" value={{ bounty.id }} readonly/>
                     
@@ -72,13 +72,11 @@
             <div style="display: flex;">
                 <div class="bounty-picture-frame">
                     <div class="bounty-picture-image"></div>
-                    <div class="bounty-picture-edit"></div>
                 </div>
                 <div class="bounty-description-frame">
                     <div class="bounty-description-text">
                         {{bounty.target_description}}
                     </div>
-                    <div class="bounty-description-edit"></div>
                 </div>
             </div>
             <div style="display: flex;">

@@ -73,7 +73,11 @@
                         {{bounty.target_name}}
                     </div>
                 </div>
-                <div class="bounty-settings-button"></div>
+                {% if view.kwargs.category == 'created' %}
+                <a href="{% url 'bounty-update' bounty.id %}">
+                    <div class="bounty-settings-button"></div>
+                </a>
+                {% endif %}
             </div>
             <div style="display: flex;">
                 <div class="bounty-picture-frame">
