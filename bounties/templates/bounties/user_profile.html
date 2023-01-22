@@ -38,14 +38,14 @@
     </div>
 
     <div style="width: 800px; margin: auto; margin-top: 64px;">
-        <div class="bounty-container">
+        <div id="profile-container">
             <div style="height: 74px;"></div>
             <div style="display: flex;">
-                <div class="bounty-picture-frame">
+                <div class="bounty-picture-frame" style="margin-top: -18px;">
                     <div class="bounty-picture-image"></div>
                     <div class="bounty-picture-edit"></div>
                 </div>
-                <div class="bounty-description-frame">
+                <div class="bounty-description-frame" style="margin-top: -18px;">
                     <div class="bounty-description-text">
                         <div>&nbsp;</div>
                         <div>Username: {{ user.username }}</div>
@@ -57,7 +57,9 @@
                         <div>Completed bounties: {{ bounties_completed_amount }}</div>
                         <div></div>
                     </div>
-                    <div class="bounty-description-edit"></div>
+                    <a href="{% url 'user-profile-update' request.user.id %}">
+                        <div class="bounty-description-edit"></div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -77,18 +79,18 @@
                 <a href="{% url 'bounty-update' bounty.id %}">
                     <div class="bounty-settings-button"></div>
                 </a>
+                {% else %}
+                <div style="height: 36px; width: 36px; margin-right: 42px; margin-top: 28px;"></div>
                 {% endif %}
             </div>
             <div style="display: flex;">
                 <div class="bounty-picture-frame">
                     <div class="bounty-picture-image"></div>
-                    <div class="bounty-picture-edit"></div>
                 </div>
                 <div class="bounty-description-frame">
                     <div class="bounty-description-text">
                         {{bounty.target_description}}
                     </div>
-                    <div class="bounty-description-edit"></div>
                 </div>
             </div>
             <div style="display: flex;">

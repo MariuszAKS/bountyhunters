@@ -1,0 +1,38 @@
+@font-face {
+    font-family: 'PixelFont';
+    src: url('../fonts/yoster.ttf')
+}
+
+body {
+    background-color: #565656;
+    margin: 0px;
+    font-family: 'PixelFont';
+}
+
+#form_container {
+    width: min-content;
+    margin: auto;
+    margin-top: 80px;
+}
+
+#bounty_page {
+    background-image: url('../images/paper_sheet_bounty_update.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    
+    height: 460px;
+    width: 400px;
+
+    padding: 20px;
+}
+
+#profile_page {
+    background-image: url('../images/paper_sheet_profile_update.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    
+    height: 430px;
+    width: 180px;
+
+    padding: 20px;
+}

@@ -1,14 +1,13 @@
-from django.contrib.auth import login, models
+from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
-from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from django.views.generic import View
-from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 from django.urls import reverse_lazy
+from django.utils import timezone
 from .models import Bounty, Observe
 
 
@@ -28,6 +27,9 @@ class CustomRegisterView(FormView):
         if self.request.user.is_authenticated:
             return redirect('bounties')
         return super(CustomRegisterView, self).get(*args, **kwargs)
+    
+    def get_success_url(self):
+        return reverse_lazy('bounties')
 
 class CustomLoginView(LoginView):
     template_name = 'bounties/login.html'
@@ -65,43 +67,26 @@ class UserProfileView(ListView):
 
         return context
 
+class UserProfileUpdateView(UpdateView):
+    model = User
+    fields = ['username', 'first_name', 'last_name', 'email']
+    template_name = 'bounties/user_form.html'
+
+    def get_success_url(self):
+        return reverse_lazy('user-profile', kwargs={'pk': self.request.user.id, 'category': 'created'})
 
 class BountyListView(ListView):
     model = Bounty
     context_object_name = 'bounty_list'
     template_name = 'bounties/bounty_list.html'
 
-    # def get(self, *args, **kwargs):
-    #     self.object_list = self.get_queryset()
-    #     context = self.get_context_data()
-
-    #     for bounty in context['bounties']:
-    #         bounty.observed = any((obs.user_id == self.request.user.id and obs.bounty_id == bounty.id) for obs in context['observe_list'])
-
-    #     return self.render_to_response(context)
-
-    # def post(self, *args, **kwargs):
-    #     user_id = self.request.user.id
-    #     bounty_id = int(self.request.POST['bounty_id'])
-
-    #     self.object_list = self.get_queryset()
-    #     context = self.get_context_data()
-
-    #     if not any((obs.user_id == user_id and obs.bounty_id == bounty_id) for obs in context['observe_list']):
-    #         observe = Observe.objects.create(user_id=user_id, bounty_id=bounty_id)
-    #         observe.save()
-    #         print('SAVE')
-    #     else:
-    #         Observe.objects.filter(user_id=user_id).filter(bounty_id=bounty_id).delete()
-    #         print('DELETE')
-        
-    #     return self.get(*args, **kwargs)
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         observe_list = Observe.objects.all().filter(user_id=self.request.user.id)
 
-        context['bounties'] = context['bounty_list'].filter(target_completed=False).exclude(creator=self.request.user)
+        context['bounties'] = context['bounty_list'].filter(target_completed=False)
+        if self.request.user.is_authenticated:
+            context['bounties'] = context['bounties'].exclude(creator=self.request.user)
         context['count'] = context['bounties'].count()
         context['observe_list'] = observe_list
 
@@ -118,23 +103,6 @@ class BountyListView(ListView):
         
         for bounty in context['bounties']:
             bounty.observed = any((obs.user_id == self.request.user.id and obs.bounty_id == bounty.id) for obs in context['observe_list'])
-        
-        # search_input_difficulties = self.request.GET.getlist('search-difficulty')
-        # print(search_input_difficulties)
-        # search_input_difficulty_1 = self.request.GET.get('search-difficulty-1')
-        # search_input_difficulty_2 = self.request.GET.get('search-difficulty-2')
-        # search_input_difficulty_3 = self.request.GET.get('search-difficulty-3')
-        # search_input_difficulty_4 = self.request.GET.get('search-difficulty-4')
-        # search_input_difficulty_5 = self.request.GET.get('search-difficulty-5')
-
-        # context['search_input_name'] = search_input_name
-        # context['search_input_reward_lowest'] = search_input_reward_lowest
-        # context['search_input_reward_highest'] = search_input_reward_highest
-        # context['search_input_difficulty_1'] = search_input_difficulty_1
-        # context['search_input_difficulty_2'] = search_input_difficulty_2
-        # context['search_input_difficulty_3'] = search_input_difficulty_3
-        # context['search_input_difficulty_4'] = search_input_difficulty_4
-        # context['search_input_difficulty_5'] = search_input_difficulty_5
 
         return context
 
@@ -157,15 +125,30 @@ def update_observe(request, *args, **kwargs):
 
 class BountyCreateView(CreateView):
     model = Bounty
-    fields = '__all__'
-    success_url = reverse_lazy('bounties')
+    fields = ['target_name', 'target_reward', 'target_description', 'target_difficulty']
+    success_url = reverse_lazy('user-profile')
+
+    def form_valid(self, form):
+        form.instance.creator = self.request.user
+        form.instance.hunter = 0
+        form.instance.observed = False
+
+        form.instance.target_posted_date = timezone.now()
+        form.instance.target_completed_date = timezone.now()
+        form.instance.completed = False
+
+        return super(BountyCreateView, self).form_valid(form)
 
 class BountyUpdateView(UpdateView):
     model = Bounty
-    fields = '__all__'
-    success_url = reverse_lazy('bounties')
+    fields = ['target_name', 'target_reward', 'target_description', 'target_difficulty', 'target_completed', 'target_completed_date']
+    
+    def get_success_url(self):
+        return reverse_lazy('user-profile', kwargs={'pk': self.request.user.id, 'category': 'created'})
 
 class BountyDeleteView(DeleteView):
     model = Bounty
     fields = '__all__'
-    success_url = reverse_lazy('bounties')
+    
+    def get_success_url(self):
+        return reverse_lazy('user-profile', kwargs={'pk': self.request.user.id, 'category': 'created'})

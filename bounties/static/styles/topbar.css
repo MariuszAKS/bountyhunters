@@ -77,6 +77,16 @@ input[type=text] {
     width: 100px;
 }
 
+input[type=number] {
+    background-color: #c1c0b4;
+
+    width: 100px;
+}
+
+input[type=email] {
+    background-color: #c1c0b4;
+}
+
 input[type=checkbox] {
     accent-color: #c1c0b4;
 }

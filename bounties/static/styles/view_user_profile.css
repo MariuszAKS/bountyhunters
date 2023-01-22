@@ -10,6 +10,15 @@ body {
     font-family: 'PixelFont';
 }
 
+#profile-container {
+    background-image: url("../images/wooden_board_profile.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    height: 322px;
+    width: 800px;
+}
+
 .category {
     background-image: url('../images/category_image.png');
     background-repeat: no-repeat;
