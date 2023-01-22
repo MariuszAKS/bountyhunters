@@ -67,7 +67,7 @@ class UserProfileView(ListView):
 
         return context
 
-class UserProfileUpdateView(UpdateView):
+class UserProfileUpdateView(UpdateView, LoginRequiredMixin):
     model = User
     fields = ['username', 'first_name', 'last_name', 'email']
     template_name = 'bounties/user_form.html'
@@ -123,7 +123,7 @@ def update_observe(request, *args, **kwargs):
         
         return redirect('/')
 
-class BountyCreateView(CreateView):
+class BountyCreateView(CreateView, LoginRequiredMixin):
     model = Bounty
     fields = ['target_name', 'target_reward', 'target_description', 'target_difficulty']
     success_url = reverse_lazy('user-profile')
@@ -139,14 +139,14 @@ class BountyCreateView(CreateView):
 
         return super(BountyCreateView, self).form_valid(form)
 
-class BountyUpdateView(UpdateView):
+class BountyUpdateView(UpdateView, LoginRequiredMixin):
     model = Bounty
     fields = ['target_name', 'target_reward', 'target_description', 'target_difficulty', 'target_completed', 'target_completed_date']
     
     def get_success_url(self):
         return reverse_lazy('user-profile', kwargs={'pk': self.request.user.id, 'category': 'created'})
 
-class BountyDeleteView(DeleteView):
+class BountyDeleteView(DeleteView, LoginRequiredMixin):
     model = Bounty
     fields = '__all__'
     

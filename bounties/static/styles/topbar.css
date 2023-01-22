@@ -87,6 +87,10 @@ input[type=email] {
     background-color: #c1c0b4;
 }
 
+input[type=password] {
+    background-color: #c1c0b4;
+}
+
 input[type=checkbox] {
     accent-color: #c1c0b4;
 }
