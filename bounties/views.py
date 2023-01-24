@@ -54,7 +54,7 @@ class UserProfileView(ListView):
             for relation in observes:
                 if relation.bounty_id == bounty.id:
                     context['bounties_observing'].append(bounty)
-        context['bounties_completed'] = context['bounties'].filter(hunter=self.request.user.id)
+        context['bounties_completed'] = context['bounties'].filter(hunter=self.request.user)
 
         if self.kwargs['category'] == 'created':
             context['bounties'] = context['bounties_created']
@@ -129,7 +129,7 @@ class BountyCreateView(CreateView, LoginRequiredMixin):
 
     def form_valid(self, form):
         form.instance.creator = self.request.user
-        form.instance.hunter = 0
+        form.instance.hunter = None
         form.instance.observed = False
 
         form.instance.target_posted_date = timezone.now()
@@ -143,7 +143,7 @@ class BountyCreateView(CreateView, LoginRequiredMixin):
 
 class BountyUpdateView(UpdateView, LoginRequiredMixin):
     model = Bounty
-    fields = ['target_name', 'target_reward', 'target_description', 'target_difficulty', 'target_completed', 'target_completed_date']
+    fields = ['target_name', 'target_reward', 'target_description', 'target_difficulty', 'target_completed', 'hunter', 'target_completed_date']
     
     def get_success_url(self):
         return reverse_lazy('user-profile', kwargs={'pk': self.request.user.id, 'category': 'created'})

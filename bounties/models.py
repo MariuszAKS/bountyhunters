@@ -13,9 +13,9 @@ class Bounty(models.Model):
         (5, '5 stars'),
     ]
 
-    creator = models.ForeignKey(User, on_delete=models.CASCADE)
-    hunter = models.IntegerField(default=0)
-    observed = models.BooleanField(default=False)
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='creators')
+    hunter = models.ForeignKey(User, on_delete=models.CASCADE, related_name='hunters', null=True, blank=True)
+    observed = models.BooleanField()
     
     target_name = models.CharField(max_length=100, default='Bezimienny')
     target_reward = models.IntegerField(default=100)
