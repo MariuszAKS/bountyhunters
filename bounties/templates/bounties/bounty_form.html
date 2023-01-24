@@ -1,0 +1,37 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html>
+    <link rel="stylesheet" href="{% static 'styles/topbar.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/view_forms.css' %}">
+</html>
+
+<body>
+    <div id="topbar">
+        <a href="{% url 'bounties' %}">
+            <div id="topbar-logo">Bounty-Hunters</div>
+        </a>
+        <div id="topbar-user">
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'user-profile' request.user.id 'created' %}">{{request.user}}</a>
+            <a href="{% url 'logout' %}?next=/">Logout</a>
+            {% else %}
+            <a href="{% url 'login' %}">Log in</a>
+            <a href="{% url 'register' %}">Create new account</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div id="form_container">
+        <div id="bounty_page">
+            <form method="POST" action="">
+                {% csrf_token %}
+                {{form.as_p}}
+                
+                <a href="{% url 'user-profile' request.user.id 'created' %}">Go back</a>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+</body>

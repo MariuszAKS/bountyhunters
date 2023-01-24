@@ -1,0 +1,137 @@
+#topbar {
+    background-color: #2d1602;
+    background-image: url("../images/topbar_board_middle.png");
+    border-bottom: 2px solid #1c0e01;
+
+    height: 62px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+#topbar-logo {
+    background-image: url("../images/topbar_board_left.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    width: 230px;
+    padding: 12px 12px 28px 8px;
+
+    display: grid;
+    column-gap: 10px;
+
+    color: #ddd;
+    font-size: 24px;
+    text-align: center;
+    text-shadow: 2px 2px #000, 4px 4px #000;
+}
+
+
+
+#topbar-middle-categories {
+    width: 800px;
+
+    display: flex;
+}
+
+.topbar-middle-category-button {
+    background-image: url("../images/topbar_category_button.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    height: 48px;
+    width: 250px;
+    padding-top: 14px;
+
+    font-size: 28px;
+}
+
+
+
+#topbar-middle-grid-container {
+    width: 800px;
+
+    display: grid;
+    grid-template-columns: 200px 246px 194px 130px;
+    column-gap: 10px;
+    row-gap: 4px;
+
+    color: #ddd;
+    font-size: 20px;
+    text-shadow: 2px 2px #000, 4px 4px #000;
+}
+
+.topbar-middle-grid-title {
+    padding: 4px 0px 2px 0px;
+    text-align: center;
+}
+
+input[type=text] {
+    background-color: #c1c0b4;
+
+    width: 100px;
+}
+
+input[type=number] {
+    background-color: #c1c0b4;
+
+    width: 100px;
+}
+
+input[type=email] {
+    background-color: #c1c0b4;
+}
+
+input[type=password] {
+    background-color: #c1c0b4;
+}
+
+input[type=checkbox] {
+    accent-color: #c1c0b4;
+}
+
+input[type=submit] {
+    background-color: transparent;
+    border: none;
+
+    padding: 6px 12px 6px 8px;
+
+    grid-column: 4;
+    grid-row: 1 / span 2;
+
+    color: #ddd;
+    font-family: 'PixelFont';
+    font-size: 20px;
+    text-shadow: 2px 2px #000, 4px 4px #000;
+}
+input[type=submit]:hover {
+    cursor: pointer;
+}
+
+#topbar-user {
+    background-image: url("../images/topbar_board_right.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    width: 250px;
+    padding: 10px 0px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+
+
+a {
+    color: #ddd;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 2px 2px #000, 4px 4px #000;
+}

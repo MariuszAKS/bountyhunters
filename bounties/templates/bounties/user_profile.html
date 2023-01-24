@@ -1,0 +1,116 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html>
+    <link rel="stylesheet" href="{% static 'styles/view_user_profile.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/topbar.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/bounty_container.css' %}">
+</html>
+
+<body>
+    <div id="topbar">
+        <a href="{% url 'bounties' %}">
+            <div id="topbar-logo">Bounty-Hunters</div>
+        </a>
+        <div id="topbar-middle-categories">
+            <a href="{% url 'user-profile' request.user.id 'created' %}">
+                <div class="topbar-middle-category-button">Created</div>
+            </a>
+            <div style="width: 25px"></div>
+            <a href="{% url 'user-profile' request.user.id 'observing' %}">
+                <div class="topbar-middle-category-button">Observing</div>
+            </a>
+            <div style="width: 25px"></div>
+            <a href="{% url 'bounty-create' %}">
+                <div class="topbar-middle-category-button">+ Create +</div>
+            </a>
+        </div>
+        <div id="topbar-user">
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'user-profile' request.user.id 'created' %}">{{request.user}}</a>
+            <a href="{% url 'logout' %}?next=/">Logout</a>
+            {% else %}
+            <a href="{% url 'login' %}">Log in</a>
+            <a href="{% url 'register' %}">Create new account</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div style="width: 800px; margin: auto; margin-top: 64px;">
+        <div id="profile-container">
+            <div style="height: 74px;"></div>
+            <div style="display: flex;">
+                <div class="bounty-picture-frame" style="margin-top: -18px;">
+                    <div class="bounty-picture-image"></div>
+                    <div class="bounty-picture-edit"></div>
+                </div>
+                <div class="bounty-description-frame" style="margin-top: -18px;">
+                    <div class="bounty-description-text">
+                        <div>&nbsp;</div>
+                        <div>Username: {{ user.username }}</div>
+                        <div>&nbsp;&nbsp;Name: {{ user.first_name }} {{ user.last_name }}</div>
+                        <div>&nbsp;&nbsp;Email: {{ user.email }}</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>Created bounties: {{ bounties_created_amount }}</div>
+                        <div>Completed bounties: {{ bounties_completed_amount }}</div>
+                        <div></div>
+                    </div>
+                    <a href="{% url 'user-profile-update' request.user.id %}">
+                        <div class="bounty-description-edit"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="bounties_container">
+        {% for bounty in bounties %}
+        <div class="bounty-container">
+            <div style="display: flex; justify-content: space-between;">
+                <div class="bounty-wanted-sign"></div>
+                <div class="bounty-name-frame">
+                    <div class="bounty-name-text">
+                        {{bounty.target_name}}
+                    </div>
+                </div>
+                {% if view.kwargs.category == 'created' %}
+                <a href="{% url 'bounty-update' bounty.id %}">
+                    <div class="bounty-settings-button"></div>
+                </a>
+                {% else %}
+                <div style="height: 36px; width: 36px; margin-right: 42px; margin-top: 28px;"></div>
+                {% endif %}
+            </div>
+            <div style="display: flex;">
+                <div class="bounty-picture-frame">
+                    <div class="bounty-picture-image"></div>
+                </div>
+                <div class="bounty-description-frame">
+                    <div class="bounty-description-text">
+                        {{bounty.target_description}}
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex;">
+                <div class="bounty-difficulty-frame">
+                    <div class="bounty-difficulty-text">
+                        {{bounty.target_difficulty}}
+                    </div>
+                </div>
+                <div class="bounty-reward-frame">
+                    <div class="bounty-reward-text">
+                        {{bounty.target_reward}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% empty %}
+        <h3>No bounties</h3>
+
+        {% endfor %}
+    </div>
+    <div style="height: 100px"></div>
+</body>
