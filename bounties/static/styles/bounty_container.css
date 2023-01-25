@@ -75,6 +75,10 @@
 }
 
 .bounty-picture-image {
+    background-image: url("../images/techno.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+
     height: 100px;
     width: 100px;
     margin-left: 10px;
