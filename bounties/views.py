@@ -125,7 +125,7 @@ def update_observe(request, *args, **kwargs):
 
 class BountyCreateView(CreateView, LoginRequiredMixin):
     model = Bounty
-    fields = ['target_name', 'target_reward', 'target_description', 'target_difficulty']
+    fields = ['target_name', 'target_photo', 'target_reward', 'target_description', 'target_difficulty']
 
     def form_valid(self, form):
         form.instance.creator = self.request.user
@@ -143,7 +143,7 @@ class BountyCreateView(CreateView, LoginRequiredMixin):
 
 class BountyUpdateView(UpdateView, LoginRequiredMixin):
     model = Bounty
-    fields = ['target_name', 'target_reward', 'target_description', 'target_difficulty', 'target_completed', 'hunter', 'target_completed_date']
+    fields = ['target_name', 'target_photo', 'target_reward', 'target_description', 'target_difficulty', 'target_completed', 'hunter', 'target_completed_date']
     
     def get_success_url(self):
         return reverse_lazy('user-profile', kwargs={'pk': self.request.user.id, 'category': 'created'})

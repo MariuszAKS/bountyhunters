@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib.auth.views import LogoutView
 from django.urls import path
 from .views import CustomRegisterView, CustomLoginView, UserProfileView, UserProfileUpdateView
@@ -20,3 +22,5 @@ urlpatterns = [
     path('user-profile/<int:pk>/<str:category>/', UserProfileView.as_view(), name='user-profile'),
     path('user-profile-update/<int:pk>/', UserProfileUpdateView.as_view(), name='user-profile-update'),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

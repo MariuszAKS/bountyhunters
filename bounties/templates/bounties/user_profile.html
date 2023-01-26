@@ -85,11 +85,16 @@
             </div>
             <div style="display: flex;">
                 <div class="bounty-picture-frame">
-                    <div class="bounty-picture-image"></div>
+                    {% if bounty.target_photo != Null %}
+                    <img src={{bounty.target_photo}}/>
+                    {% else %}
+                    <img src={% static 'images/techno.png' %} class="bounty-picture-image"/>
+                    {% endif %}
                 </div>
                 <div class="bounty-description-frame">
                     <div class="bounty-description-text">
                         {{bounty.target_description}}
+                        {{bounty.target_photo}}
                     </div>
                 </div>
             </div>

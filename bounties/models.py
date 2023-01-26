@@ -18,8 +18,9 @@ class Bounty(models.Model):
     observed = models.BooleanField()
     
     target_name = models.CharField(max_length=100, default='Bezimienny')
+    target_photo = models.ImageField(upload_to='bounties/uploads/', default=None, blank=True, null=True)
     target_reward = models.IntegerField(default=100)
-    target_description = models.TextField(max_length=375, blank=True, default='Jest słaby i wiele zapomniał', )
+    target_description = models.TextField(max_length=375, blank=True, default='Jest słaby i wiele zapomniał')
     target_difficulty = models.IntegerField(choices=DIFFICULTY_CHOICES, default=1)
     
     target_posted_date = models.DateField(auto_now_add=True)
